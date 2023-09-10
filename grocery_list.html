@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <title>grocery</title>
+    <style>
+       *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+        }
+        .container{
+          margin:60px ;
+        }
+        #main-header{
+          text-align: left;
+           margin-bottom: 10px;
+
+        }
+        .item_header{
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+       .item_container{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+      
+       }
+       #inputField{
+       
+       margin-right: 10px;
+       }
+    button {
+      width: 50px;
+      
+      margin-left: 15px;
+
+     }
+       ul{
+        list-style-type: none;
+         text-align: center;
+        padding: 0;
+     
+       
+       }
+       li td{
+       text-align: center;
+        vertical-align: middle;
+       }
+
+       
+        table th{
+          visibility: hidden;
+        }
+        table tbody tr td{
+         
+         vertical-align: middle;
+         text-align: center;
+          
+        }
+        .checkbox{
+          float: left;
+          margin: 2px;
+        }
+
+       .delete-button {  
+            
+            
+            border: none;
+            cursor: pointer;
+        }
+       
+        
+       
+    </style>
+</head>
+<body>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>glocery</title>
+       
+      </head>
+      <body>
+        <div class="container">
+            <header id="main-header" >
+                
+                    <div class="header_contnet">
+                        <h1 id="header-title">My Glocery List</h1>
+                        
+                    </div>
+               
+    
+            </header>
+            <div class="item_list">
+              <h4 class="item_header" > Add new item</h4>
+            
+                <div class="form-content">
+                  <form id="inputForm" >
+                  <div class="item_container">
+
+                   
+                    <input type="text"
+                    placeholder="Item name"
+                    id="inputField"
+                    >
+                    
+                  
+                 
+                    <input type="text"
+                    placeholder="Amount"
+                    id="inputAmount"
+                    >
+            
+                
+                  
+                    <button type="submit "   >Add
+                    
+                </button>
+                   
+                   
+                  </div>
+                  <h6>List</h6>
+              </form>
+
+                  
+                  <ul class="todo" id="todoContainer">
+    
+                  </ul>
+                 
+                </div>
+              </div>
+        </div>
+    
+   <script >
+    const  formBody=document.getElementById('inputForm');
+     const inputName=document.getElementById('inputField');
+     const amountName=document.getElementById('inputAmount');
+     const todoContainer=document.getElementById('todoContainer');
+
+     formBody.addEventListener('submit',function(e){
+
+         e.preventDefault();
+
+         const item_input=inputName.value.trim();
+         const amount_input=amountName.value.trim();
+
+         if(item_input=='' || amount_input=='' ){
+           alert('Enter both values');
+           return;
+         }
+
+         const list =document.createElement('li');
+         list.style.margin='none';
+         list.style.padding='none';
+         list.style.alignItems='center'
+              list.innerHTML=`
+              <table>
+                <thead>
+                  <tr>
+                    <th>item Name</th>
+                    <th> Amount</th>
+                    <th> Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <tr>
+                    <td>
+                      <input type="checkbox" class="checkbox">
+                    ${item_input} 
+                 </td>
+                    <td>  ${amount_input} </td>
+                    <td> 
+                <button class=" mb-3 delete-button btn btn-sm btn-light text-dark " >Delete</button>
+                </td>
+                    <tr>
+                    
+                </tbody>
+                </table>
+            
+                 
+               
+               `;
+
+           
+
+
+            const deleteButton=list.querySelector(' .delete-button');
+            const checkButton= list.querySelector('.checkbox');
+
+            //create a function for the delete button
+            deleteButton.addEventListener("click", function(){
+
+              list.remove();
+            });
+
+            ///create a function for the checkbox
+            checkButton.addEventListener("change",function(){
+              if(checkButton.checked){
+                list.style.textDecoration="line-through";
+                list.style.color='rgba(19,31,18,0.4)'
+              }else{
+                list.style.textDecoration="none"
+                list.style.color='inherit'
+              }
+            });
+            todoContainer.appendChild(list);
+            
+            inputName.value='';
+            amountName.value='';
+     })
+    </script>  
+    </body>
+    </html> 
+</body>
+</html>
